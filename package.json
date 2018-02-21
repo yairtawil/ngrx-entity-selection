@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "copy-dist": "copyfiles dist/**/* . --up 1"
+    "build:gh-pages": "npm run build && copyfiles dist/**/* . --up 1 && node scripts/gh-pages.js"
   },
   "private": true,
   "dependencies": {
