@@ -1,0 +1,26 @@
+language: node_js
+
+node_js:
+  - 'node'
+
+install:
+  - "npm install"
+
+script:
+  - "npm run build"
+  - "npm run copy-dist"
+
+cache:
+  directories:
+     - "./node_modules"
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
+
+
+notifications:
+  email: false
