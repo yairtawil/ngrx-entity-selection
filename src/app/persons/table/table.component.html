@@ -1,0 +1,36 @@
+<div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>
+        <input type="checkbox"
+               [disabled]="noEntities()"
+               (change)="selectAll()"
+               [checked]="isAllSelected()">
+      </th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Age</th>
+      <th>Phone</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons">
+      <td>
+        <input type="checkbox"
+               (change)="select(person.id)"
+               [checked]="isSelected(person.id)">
+      </td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.age}}</td>
+      <td>{{person.phone}}</td>
+      <td>  <button type="button" class="btn btn-info" (click)="edit(person)">Edit</button> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-edit *ngIf="editPerson" [(person)]="editPerson"></app-edit>
