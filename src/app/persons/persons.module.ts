@@ -4,8 +4,7 @@ import { TableComponent } from './table/table.component';
 import { ToolsComponent } from './tools/tools.component';
 import { StoreModule } from '@ngrx/store';
 import { personFeatureKey, personReducer } from './reducers/person.reducer';
-import { PersonsViewComponent } from './persons-view/persons-view.component';
-import { EditComponent } from './edit/edit.component';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   imports: [
@@ -15,11 +14,10 @@ import { EditComponent } from './edit/edit.component';
   declarations: [
     TableComponent,
     ToolsComponent,
-    PersonsViewComponent,
-    EditComponent
+    ViewComponent
   ],
   exports: [
-    PersonsViewComponent
+    ViewComponent
   ]
 })
 export class PersonsModule { }

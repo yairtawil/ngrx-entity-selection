@@ -14,7 +14,6 @@ export class TableComponent implements OnInit {
   selected$ = this.store.select(selectSelected);
   selected;
   persons;
-  editPerson: Person;
 
   constructor(public store: Store<IPersonsState>) {
   }
@@ -50,10 +49,6 @@ export class TableComponent implements OnInit {
 
   noEntities() {
     return (this.persons.length === 0);
-  }
-
-  edit(person: Person) {
-    this.editPerson = person;
   }
 
 }
