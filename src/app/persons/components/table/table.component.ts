@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { selectAllUsers, selectSelectedIds } from '../reducers/index';
+import { selectAllUsers, selectSelectedIds } from '../../reducers/index';
 import { Store } from '@ngrx/store';
-import { IPersonsState } from '../reducers/person.reducer';
-import { SelectAll, SelectOne, SelectOnly, UnSelectAll, UnSelectOne } from '../actions/person.actions';
-import { selectSelectOption } from '../reducers';
-import { SelectOption } from '../model/select-option.model';
+import { IPersonsState } from '../../reducers/person.reducer';
+import { SelectAll, SelectOne, SelectOnly, UnSelectAll, UnSelectOne } from '../../actions/person.actions';
+import { selectSelectOption } from '../../reducers';
+import { SelectOption } from '../../model/select-option.model';
 
 @Component({
   selector: 'app-table',
@@ -13,18 +13,18 @@ import { SelectOption } from '../model/select-option.model';
 })
 export class TableComponent implements OnInit {
   persons$ = this.store.select(selectAllUsers);
-  selected$ = this.store.select(selectSelectedIds);
+  selectedIds$ = this.store.select(selectSelectedIds);
   selectOption$ = this.store.select(selectSelectOption);
 
   persons;
-  selected;
+  selectedIds;
   selectOption;
 
   constructor(public store: Store<IPersonsState>) {
   }
 
   ngOnInit() {
-    this.selected$.subscribe(selected => this.selected = selected);
+    this.selectedIds$.subscribe(selectedIds => this.selectedIds = selectedIds);
     this.persons$.subscribe(persons => this.persons = persons);
     this.selectOption$.subscribe((selectOption: SelectOption) => this.selectOption = selectOption);
   }
@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
   }
 
   isSelected(id) {
-    return this.selected.includes(id);
+    return this.selectedIds.includes(id);
   }
 
   selectAll() {
@@ -57,7 +57,7 @@ export class TableComponent implements OnInit {
   }
 
   isAllSelected(): boolean {
-    return !this.noEntities() && (this.selected.length === this.persons.length);
+    return !this.noEntities() && (this.selectedIds.length === this.persons.length);
   }
 
   noEntities() {

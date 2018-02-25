@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AddOne, DeleteMany, SetSelectOption } from '../actions/person.actions';
+import { AddOne, DeleteMany, SetSelectOption } from '../../actions/person.actions';
 import { Store } from '@ngrx/store';
-import { IPersonsState } from '../reducers/person.reducer';
+import { IPersonsState } from '../../reducers/person.reducer';
 import * as faker from 'faker';
-import { selectSelectedIds, selectSelectOption } from '../reducers';
-import { SelectOption, SelectOptions } from '../model/select-option.model';
+import { selectSelectedIds, selectSelectOption } from '../../reducers';
+import { SelectOption, SelectOptions } from '../../model/select-option.model';
 
 @Component({
   selector: 'app-tools',
