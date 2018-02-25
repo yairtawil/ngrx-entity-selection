@@ -5,7 +5,7 @@
     <tr>
       <th>
         <input type="checkbox"
-               [disabled]="noEntities()"
+               [disabled]="disabledSelectAll()"
                (change)="selectAll()"
                [checked]="isAllSelected()">
       </th>

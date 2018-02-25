@@ -6,20 +6,23 @@ import {
   DeleteMany,
   DeleteOne,
   PersonActions,
-  PersonActionTypes, SelectAll, SelectMany, SelectOne, UnSelectOne,
+  PersonActionTypes, SelectAll, SelectMany, SelectOne, SelectOnly, SetSelectOption, UnSelectMany, UnSelectOne,
   UpdateOne
 } from '../actions/person.actions';
 import { Person } from '../model/person.model';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { SelectOption } from '../model/select-option.model';
 
 
 export const personAdapter = createEntityAdapter<Person>();
 
 export interface IPersonsState extends EntityState<Person> {
-  selectedIds: Set<string>;
+  selectOption: SelectOption;
 }
 
-export const personInitialState: IPersonsState = personAdapter.getInitialState();
+export const personInitialState: IPersonsState = personAdapter.getInitialState({
+  selectOption: 'Multiple'
+});
 
 export const personFeatureKey = 'person';
 
@@ -64,16 +67,25 @@ export function personReducer(state: IPersonsState = personInitialState, action:
       return personAdapter.selectAll(state);
     }
 
+    case PersonActionTypes.SELECT_ONLY: {
+      return personAdapter.selectOnly((<SelectOnly>action).payload, state);
+    }
+
     case PersonActionTypes.UNSELECT_ONE: {
       return personAdapter.unSelectOne((<UnSelectOne>action).payload, state);
     }
 
-    // case PersonActionTypes.UNSELECT_MANY: {
-    //   return AdapterSelectFunctions.unSelectMany(action, state);
-    // }
+    case PersonActionTypes.UNSELECT_MANY: {
+      return personAdapter.unSelectMany((<UnSelectMany>action).payload, state);
+    }
 
     case PersonActionTypes.UNSELECT_ALL: {
       return personAdapter.unSelectAll(state);
+    }
+
+    case PersonActionTypes.SET_SELECT_OPTION: {
+      const updatedState = personAdapter.unSelectAll(state);
+      return { ...updatedState, selectOption: (<SetSelectOption> action).payload };
     }
 
     default:
@@ -86,7 +98,7 @@ export const {
   selectEntities: selectUserEntities,
   selectAll: selectAllUsers,
   selectTotal: selectUserTotal,
-  selectSelectedIds
+  selectSelectedIds: selectSelectedIds
 } = personAdapter.getSelectors();
 
 

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { selectAllUsers, selectSelectedIds } from '../reducers/index';
 import { Store } from '@ngrx/store';
 import { IPersonsState } from '../reducers/person.reducer';
-import { SelectAll, SelectOne, UnSelectAll, UnSelectOne } from '../actions/person.actions';
+import { SelectAll, SelectOne, SelectOnly, UnSelectAll, UnSelectOne } from '../actions/person.actions';
+import { selectSelectOption } from '../reducers';
+import { SelectOption } from '../model/select-option.model';
 
 @Component({
   selector: 'app-table',
@@ -12,8 +14,11 @@ import { SelectAll, SelectOne, UnSelectAll, UnSelectOne } from '../actions/perso
 export class TableComponent implements OnInit {
   persons$ = this.store.select(selectAllUsers);
   selected$ = this.store.select(selectSelectedIds);
-  selected;
+  selectOption$ = this.store.select(selectSelectOption);
+
   persons;
+  selected;
+  selectOption;
 
   constructor(public store: Store<IPersonsState>) {
   }
@@ -21,13 +26,21 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.selected$.subscribe(selected => this.selected = selected);
     this.persons$.subscribe(persons => this.persons = persons);
+    this.selectOption$.subscribe((selectOption: SelectOption) => this.selectOption = selectOption);
   }
 
   select(id) {
     if (this.isSelected(id)) {
       this.store.dispatch(new UnSelectOne(id));
     } else {
-      this.store.dispatch(new SelectOne(id));
+      switch (this.selectOption) {
+        case 'Multiple':
+          this.store.dispatch(new SelectOne(id));
+          break;
+        case 'Single':
+          this.store.dispatch(new SelectOnly([id]));
+          break;
+      }
     }
   }
 
@@ -49,6 +62,10 @@ export class TableComponent implements OnInit {
 
   noEntities() {
     return (this.persons.length === 0);
+  }
+
+  disabledSelectAll() {
+    return this.noEntities() || this.selectOption !== 'Multiple';
   }
 
 }

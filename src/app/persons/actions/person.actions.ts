@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Person } from '../model/person.model';
+import { SelectOption } from '../model/select-option.model';
 
 export enum PersonActionTypes {
   ADD_ONE = '[Persons] Add One',
@@ -15,7 +16,9 @@ export enum PersonActionTypes {
   SELECT_ALL = '[Persons] Select All',
   UNSELECT_ONE = '[Persons] UnSelect One',
   UNSELECT_MANY = '[Persons] UnSelect Many',
-  UNSELECT_ALL = '[Persons] UnSelect All'
+  UNSELECT_ALL = '[Persons] UnSelect All',
+
+  SET_SELECT_OPTION = '[Persons] Set Select Option'
 }
 
 export class AddOne implements Action {
@@ -102,6 +105,13 @@ export class UnSelectMany implements Action {
   }
 }
 
+export class SetSelectOption implements Action {
+  readonly type = PersonActionTypes.SET_SELECT_OPTION;
+
+  constructor(public payload: SelectOption) {
+  }
+}
+
 export type PersonActions
   = AddOne
   | UpdateOne
@@ -114,4 +124,5 @@ export type PersonActions
   | SelectAll
   | UnSelectOne
   | UnSelectMany
-  | UnSelectAll;
+  | UnSelectAll
+  | SetSelectOption;

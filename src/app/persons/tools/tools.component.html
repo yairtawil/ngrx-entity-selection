@@ -1,4 +1,16 @@
 <div class="btn-group" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-primary" (click)="addPerson()">Add</button>
   <button type="button" class="btn btn-danger" [disabled]="selected.length === 0" (click)="deleteSelected()">Delete</button>
+
+  <div class="btn-group" dropdown>
+    <button dropdownToggle type="button" class="btn btn-success dropdown-toggle">
+      {{ selectOption }}<span class="caret"></span>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu" role="menu">
+      <li role="menuitem" *ngFor="let option of selectOptions">
+        <a class="dropdown-item" (click)="setSelectOptions(option)">{{option}}</a>
+      </li>
+    </ul>
+  </div>
+
 </div>
