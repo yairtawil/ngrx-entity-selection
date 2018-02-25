@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Person } from '../reducers/person.reducer';
+import { Person } from '../model/person.model';
 
 export enum PersonActionTypes {
   ADD_ONE = '[Persons] Add One',
@@ -9,6 +9,7 @@ export enum PersonActionTypes {
   DELETE_MANY = '[Persons] Delete Many',
   DELETE_ALL = '[Persons] Delete All',
 
+  SELECT_ONLY = '[Persons] Select only',
   SELECT_MANY = '[Persons] Select Many',
   SELECT_ONE = '[Persons] Select One',
   SELECT_ALL = '[Persons] Select All',
@@ -57,6 +58,12 @@ export class AddMany implements Action {
 }
 
 // Select actions
+export class SelectOnly implements Action {
+  readonly type = PersonActionTypes.SELECT_ONLY;
+
+  constructor(public payload: Person[]) {
+  }
+}
 
 export class SelectOne implements Action {
   readonly type = PersonActionTypes.SELECT_ONE;

@@ -6,6 +6,4 @@ export const selectUserIds = createSelector(personFeatureSelector, fromPerson.se
 export const selectUserEntities = createSelector(personFeatureSelector, fromPerson.selectUserEntities);
 export const selectAllUsers = createSelector(personFeatureSelector, fromPerson.selectAllUsers);
 export const selectUserTotal = createSelector(personFeatureSelector, fromPerson.selectUserTotal);
-export const selectSelected = createSelector(personFeatureSelector, (state: IPersonsState): any => {
- return <any> Array.from(state.selectedIds.values());
-});
+export const selectSelectedIds = createSelector(personFeatureSelector, fromPerson.selectSelectedIds);

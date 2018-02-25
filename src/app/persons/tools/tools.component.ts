@@ -3,7 +3,7 @@ import { AddOne, DeleteMany } from '../actions/person.actions';
 import { Store } from '@ngrx/store';
 import { IPersonsState } from '../reducers/person.reducer';
 import * as faker from 'faker';
-import { selectSelected } from '../reducers';
+import { selectSelectedIds } from '../reducers';
 
 @Component({
   selector: 'app-tools',
@@ -11,8 +11,8 @@ import { selectSelected } from '../reducers';
   styleUrls: ['./tools.component.css']
 })
 export class ToolsComponent implements OnInit {
-  selected$ = this.store.select(selectSelected);
-  selected = [];
+  selected$ = this.store.select(selectSelectedIds);
+  selected: string[] = [];
 
   constructor(public store: Store<IPersonsState>) {
   }
@@ -32,7 +32,7 @@ export class ToolsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selected$.subscribe(selected => this.selected = selected);
+    this.selected$.subscribe((selected: string[]) => this.selected = selected);
   }
 
 }

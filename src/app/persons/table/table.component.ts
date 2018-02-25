@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { selectAllUsers, selectSelected } from '../reducers/index';
+import { selectAllUsers, selectSelectedIds } from '../reducers/index';
 import { Store } from '@ngrx/store';
-import { IPersonsState, Person } from '../reducers/person.reducer';
+import { IPersonsState } from '../reducers/person.reducer';
 import { SelectAll, SelectOne, UnSelectAll, UnSelectOne } from '../actions/person.actions';
 
 @Component({
@@ -11,7 +11,7 @@ import { SelectAll, SelectOne, UnSelectAll, UnSelectOne } from '../actions/perso
 })
 export class TableComponent implements OnInit {
   persons$ = this.store.select(selectAllUsers);
-  selected$ = this.store.select(selectSelected);
+  selected$ = this.store.select(selectSelectedIds);
   selected;
   persons;
 

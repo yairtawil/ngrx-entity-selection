@@ -11,6 +11,6 @@ import * as entities from '../assets/entities.json';
 })
 export class AppComponent {
   constructor(public store: Store<any>) {
-    this.store.dispatch(new AddMany(Object.values(entities)));
+    this.store.dispatch(new AddMany(Object.keys(entities).map((key) => entities[key])));
   }
 }
