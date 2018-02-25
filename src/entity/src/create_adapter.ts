@@ -18,16 +18,18 @@ export function createEntityAdapter<T>(
 ): any | EntityAdapter<T> {
   const { selectId, sortComparer }: EntityDefinition<T> = {
     selectId: (instance: any) => instance.id,
-    sortComparer: false
+    sortComparer: false,
   };
 
   const stateFactory = createInitialStateFactory<T>();
   const selectorsFactory = createSelectorsFactory<T>();
-  const stateAdapter = sortComparer ? createSortedStateAdapter(selectId, sortComparer) : createUnsortedStateAdapter(selectId);
+  const stateAdapter = sortComparer
+    ? createSortedStateAdapter(selectId, sortComparer)
+    : createUnsortedStateAdapter(selectId);
 
-  return <any> {
+  return <any>{
     ...stateFactory,
     ...selectorsFactory,
-    ...stateAdapter
+    ...stateAdapter,
   };
 }

@@ -122,6 +122,7 @@ export type PersonActions
   | SelectOne
   | SelectMany
   | SelectAll
+  | SelectOnly
   | UnSelectOne
   | UnSelectMany
   | UnSelectAll

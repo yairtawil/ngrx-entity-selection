@@ -19,7 +19,8 @@ export function createSelectorsFactory<T>() {
     );
 
     const selectTotal = createSelector(selectIds, ids => ids.length);
-    const selectSelectedIds = (state: EntityState<T>) => Array.from(state.selectedIds.values());
+    const selectSelectedIds = (state: EntityState<T>) =>
+      Array.from(state.selectedIds.values());
 
     if (!selectState) {
       return {
@@ -27,7 +28,7 @@ export function createSelectorsFactory<T>() {
         selectEntities,
         selectAll,
         selectTotal,
-        selectSelectedIds
+        selectSelectedIds,
       };
     }
 
@@ -36,7 +37,7 @@ export function createSelectorsFactory<T>() {
       selectEntities: createSelector(selectState, selectEntities),
       selectAll: createSelector(selectState, selectAll),
       selectTotal: createSelector(selectState, selectTotal),
-      selectSelectedIds: createSelector(selectState, selectSelectedIds)
+      selectSelectedIds: createSelector(selectState, selectSelectedIds),
     };
   }
 

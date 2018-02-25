@@ -16,16 +16,18 @@ export function createSortedStateAdapter<T>(
 export function createSortedStateAdapter<T>(selectId: any, sort: any): any {
   type R = EntityState<T>;
 
-  const { removeOne, removeMany, removeAll, selectAll,
+  const {
+    removeOne,
+    removeMany,
+    removeAll,
+    selectAll,
     unSelectAll,
     selectOne,
     unSelectOne,
     selectMany,
     unSelectMany,
-    selectOnly
-  } = createUnsortedStateAdapter(
-    selectId
-  );
+    selectOnly,
+  } = createUnsortedStateAdapter(selectId);
 
   function addOneMutably(entity: T, state: R): DidMutate;
   function addOneMutably(entity: any, state: any): DidMutate {
@@ -139,10 +141,10 @@ export function createSortedStateAdapter<T>(selectId: any, sort: any): any {
 
     switch (true) {
       case didMutateByAdded === DidMutate.None &&
-        didMutateByUpdated === DidMutate.None:
+      didMutateByUpdated === DidMutate.None:
         return DidMutate.None;
       case didMutateByAdded === DidMutate.EntitiesAndIds ||
-        didMutateByUpdated === DidMutate.EntitiesAndIds:
+      didMutateByUpdated === DidMutate.EntitiesAndIds:
         return DidMutate.EntitiesAndIds;
       default:
         return DidMutate.EntitiesOnly;
