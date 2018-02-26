@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Person } from '../model/person.model';
 import { SelectOption } from '../model/select-option.model';
+import { SelectedId, SelectedIds} from '@ngrx/entity';
 
 export enum PersonActionTypes {
   ADD_ONE = '[Persons] Add One',
@@ -64,21 +65,21 @@ export class AddMany implements Action {
 export class SelectOnly implements Action {
   readonly type = PersonActionTypes.SELECT_ONLY;
 
-  constructor(public payload: Person[]) {
+  constructor(public payload: SelectedIds) {
   }
 }
 
 export class SelectOne implements Action {
   readonly type = PersonActionTypes.SELECT_ONE;
 
-  constructor(public payload: string) {
+  constructor(public payload: SelectedId) {
   }
 }
 
 export class SelectMany implements Action {
   readonly type = PersonActionTypes.SELECT_MANY;
 
-  constructor(public payload: string[]) {
+  constructor(public payload: SelectedIds) {
   }
 }
 
@@ -94,14 +95,14 @@ export class UnSelectAll implements Action {
 export class UnSelectOne implements Action {
   readonly type = PersonActionTypes.UNSELECT_ONE;
 
-  constructor(public payload: string) {
+  constructor(public payload: SelectedId) {
   }
 }
 
 export class UnSelectMany implements Action {
   readonly type = PersonActionTypes.UNSELECT_MANY;
 
-  constructor(public payload: Person[]) {
+  constructor(public payload: SelectedIds) {
   }
 }
 

@@ -1,4 +1,3 @@
-// import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeatureSelector } from '@ngrx/store';
 import {
   AddMany,
@@ -20,7 +19,7 @@ export interface IPersonsState extends EntityState<Person> {
   selectOption: SelectOption;
 }
 
-export const personInitialState: IPersonsState = personAdapter.getInitialState({
+export const personInitialState: IPersonsState = personAdapter.getInitialState(<IPersonsState>{
   selectOption: 'Multiple'
 });
 
